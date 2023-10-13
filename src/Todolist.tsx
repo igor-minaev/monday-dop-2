@@ -40,7 +40,8 @@ export function Todolist(props: PropsType) {
     return <div>
         <h3> {props.title}
             <Button name="x" onClick={() => {
-                props.removeTodolist(props.id)}}/>
+                props.removeTodolist(props.id)
+            }}/>
             {/*<button onClick={() => {*/}
             {/*    //removeTodolist*/}
             {/*}}>x*/}
@@ -53,10 +54,11 @@ export function Todolist(props: PropsType) {
                    onKeyPress={onKeyPressHandler}
                    className={error ? "error" : ""}
             />
-            <button onClick={() => {
-                'addTask'
-            }}>+
-            </button>
+            <Button name="+" onClick={() => props.addTask(title, props.id)}/>
+            {/*<button onClick={() => {*/}
+            {/*    'addTask'*/}
+            {/*}}>+*/}
+            {/*</button>*/}
             {error && <div className="error-message">{error}</div>}
         </div>
         <ul>
