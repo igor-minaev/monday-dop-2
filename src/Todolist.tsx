@@ -37,8 +37,12 @@ export function Todolist(props: PropsType) {
     }
 
     const removeTodolistHandler = () => props.removeTodolist(props.id)
-    const addTaskHandler = () => props.addTask(title, props.id)
-
+    const addTaskHandler = () => {
+        props.addTask(title, props.id)
+        setTitle('')
+    }
+    const removetaskHandler = (taskId: string) => props.removeTask(taskId, props.id)
+    const changeFilterHandler = (value: FilterValuesType) => props.changeFilter(value, props.id)
 
     return <div>
         <h3> {props.title}
@@ -70,12 +74,12 @@ export function Todolist(props: PropsType) {
                         props.changeTaskStatus(t.taskId, newIsDoneValue, props.id);
                     }
 
-                    const removetaskHandler = () => props.removeTask(t.taskId, props.id)
+                    // const removetaskHandler = () => props.removeTask(t.taskId, props.id)
 
                     return <li key={t.taskId} className={t.isDone ? "is-done" : ""}>
                         <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
                         <span>{t.title}</span>
-                        <Button name="x" onClick={removetaskHandler}/>
+                        <Button name="x" onClick={() => removetaskHandler(t.taskId)}/>
                         {/*<button onClick={() => {*/}
                         {/*    'removeTask'*/}
                         {/*}}>x*/}
@@ -85,18 +89,22 @@ export function Todolist(props: PropsType) {
             }
         </ul>
         <div>
-            <button className={props.filter === 'all' ? "active-filter" : ""}
-                    onClick={() => {
-                    }}>All
-            </button>
-            <button className={props.filter === 'active' ? "active-filter" : ""}
-                    onClick={() => {
-                    }}>Active
-            </button>
-            <button className={props.filter === 'completed' ? "active-filter" : ""}
-                    onClick={() => {
-                    }}>Completed
-            </button>
+            <Button name="All" onClick={() => changeFilterHandler("all")}/>
+            <Button name="Active" onClick={() => changeFilterHandler("active")}/>
+            <Button name="Completed" onClick={() => changeFilterHandler("completed")}/>
+
+            {/*<button className={props.filter === 'all' ? "active-filter" : ""}*/}
+            {/*        onClick={() => {*/}
+            {/*        }}>All*/}
+            {/*</button>*/}
+            {/*<button className={props.filter === 'active' ? "active-filter" : ""}*/}
+            {/*        onClick={() => {*/}
+            {/*        }}>Active*/}
+            {/*</button>*/}
+            {/*<button className={props.filter === 'completed' ? "active-filter" : ""}*/}
+            {/*        onClick={() => {*/}
+            {/*        }}>Completed*/}
+            {/*</button>*/}
         </div>
         <p></p>
         {
