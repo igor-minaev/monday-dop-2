@@ -36,12 +36,13 @@ export function Todolist(props: PropsType) {
         }
     }
 
+    const removeTodolistHandler = () => props.removeTodolist(props.id)
+    const addTaskHandler = () => props.addTask(title, props.id)
+
 
     return <div>
         <h3> {props.title}
-            <Button name="x" onClick={() => {
-                props.removeTodolist(props.id)
-            }}/>
+            <Button name="x" onClick={removeTodolistHandler}/>
             {/*<button onClick={() => {*/}
             {/*    //removeTodolist*/}
             {/*}}>x*/}
@@ -54,7 +55,7 @@ export function Todolist(props: PropsType) {
                    onKeyPress={onKeyPressHandler}
                    className={error ? "error" : ""}
             />
-            <Button name="+" onClick={() => props.addTask(title, props.id)}/>
+            <Button name="+" onClick={addTaskHandler}/>
             {/*<button onClick={() => {*/}
             {/*    'addTask'*/}
             {/*}}>+*/}
@@ -69,13 +70,16 @@ export function Todolist(props: PropsType) {
                         props.changeTaskStatus(t.taskId, newIsDoneValue, props.id);
                     }
 
+                    const removetaskHandler = () => props.removeTask(t.taskId, props.id)
+
                     return <li key={t.taskId} className={t.isDone ? "is-done" : ""}>
                         <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
                         <span>{t.title}</span>
-                        <button onClick={() => {
-                            'removeTask'
-                        }}>x
-                        </button>
+                        <Button name="x" onClick={removetaskHandler}/>
+                        {/*<button onClick={() => {*/}
+                        {/*    'removeTask'*/}
+                        {/*}}>x*/}
+                        {/*</button>*/}
                     </li>
                 })
             }
